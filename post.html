@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日记详情 - 我们的约定</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="nav">
+            <a href="index.html" class="back-btn">
+                <span>←</span>
+                <span>返回首页</span>
+            </a>
+            <span class="nav-title">日记详情</span>
+            <div style="width: 80px;"></div>
+        </nav>
+
+        <!-- 日记内容 -->
+        <div id="diaryContent">
+            <div class="loading">加载中...</div>
+        </div>
+
+        <!-- 日记导航 -->
+        <div class="diary-nav" id="diaryNav" style="display: none;">
+            <a href="#" class="nav-btn" id="prevBtn">← 上一篇</a>
+            <a href="#" class="nav-btn" id="nextBtn">下一篇 →</a>
+        </div>
+
+        <footer>
+            <p>⏳ 静待两年之约</p>
+            <p> blog.zhyqlf.online</p>
+        </footer>
+    </div>
+
+    <!-- 图片查看模态框 -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <img src="" alt="查看大图" id="modalImage">
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/post.js"></script>
+</body>
+</html>

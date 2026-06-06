@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记录此刻 - 我们的约定</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/write.css">
+</head>
+<body>
+    <div class="write-container">
+        <!-- 顶部导航 -->
+        <nav class="write-nav">
+            <a href="index.html" class="back-btn">
+                <span>←</span>
+                <span>返回</span>
+            </a>
+            <h1 class="nav-title">✍️ 记录此刻</h1>
+            <button class="save-btn" onclick="saveEntry()">
+                <span>💾</span>
+                <span>保存</span>
+            </button>
+        </nav>
+
+        <!-- 写作区域 -->
+        <div class="write-content">
+            <!-- 日期选择 -->
+            <div class="date-section">
+                <input type="date" id="entryDate" class="date-input">
+            </div>
+
+            <!-- 标题输入 -->
+            <div class="title-section">
+                <input type="text" id="entryTitle" class="title-input" placeholder="写下标题...">
+            </div>
+
+            <!-- 字体工具栏 -->
+            <div class="toolbar">
+                <div class="toolbar-group">
+                    <label>字体</label>
+                    <select id="fontFamily" onchange="updatePreview()">
+                        <option value="inherit">默认</option>
+                        <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
+                        <option value="'SimSun', serif">宋体</option>
+                        <option value="'KaiTi', serif">楷体</option>
+                        <option value="'FangSong', serif">仿宋</option>
+                        <option value="'PingFang SC', sans-serif">苹方</option>
+                    </select>
+                </div>
+                <div class="toolbar-group">
+                    <label>字号</label>
+                    <select id="fontSize" onchange="updatePreview()">
+                        <option value="0.9em">小</option>
+                        <option value="1em" selected>中</option>
+                        <option value="1.1em">大</option>
+                        <option value="1.2em">特大</option>
+                    </select>
+                </div>
+                <div class="toolbar-group">
+                    <label>颜色</label>
+                    <input type="color" id="fontColor" value="#444444" onchange="updatePreview()">
+                </div>
+                <div class="toolbar-group">
+                    <label>背景</label>
+                    <input type="color" id="bgColor" value="#ffffff" onchange="updatePreview()">
+                </div>
+            </div>
+
+            <!-- 内容编辑区 -->
+            <div class="editor-section">
+                <textarea id="entryText" class="content-input" placeholder="记录下今天的所思所想..."></textarea>
+            </div>
+
+            <!-- 预览区域 -->
+            <div class="preview-section">
+                <div class="preview-label">预览效果</div>
+                <div id="previewBox" class="preview-box">
+                    <div class="preview-placeholder">内容将在这里显示...</div>
+                </div>
+            </div>
+
+            <!-- 表情包选择 -->
+            <div class="emoji-section">
+                <div class="emoji-label">
+                    <span>😊 添加表情</span>
+                    <button class="toggle-emoji" onclick="toggleEmojiPanel()">展开 ▼</button>
+                </div>
+                <div class="emoji-panel" id="emojiPanel">
+                    <div class="emoji-category">
+                        <div class="emoji-title">常用</div>
+                        <div class="emoji-grid">
+                            <span class="emoji-item" onclick="insertEmoji('😊')">😊</span>
+                            <span class="emoji-item" onclick="insertEmoji('😄')">😄</span>
+                            <span class="emoji-item" onclick="insertEmoji('😂')">😂</span>
+                            <span class="emoji-item" onclick="insertEmoji('🥰')">🥰</span>
+                            <span class="emoji-item" onclick="insertEmoji('😍')">😍</span>
+                            <span class="emoji-item" onclick="insertEmoji('🤗')">🤗</span>
+                            <span class="emoji-item" onclick="insertEmoji('😘')">😘</span>
+                            <span class="emoji-item" onclick="insertEmoji('🤔')">🤔</span>
+                        </div>
+                    </div>
+                    <div class="emoji-category">
+                        <div class="emoji-title">心情</div>
+                        <div class="emoji-grid">
+                            <span class="emoji-item" onclick="insertEmoji('❤️')">❤️</span>
+                            <span class="emoji-item" onclick="insertEmoji('💕')">💕</span>
+                            <span class="emoji-item" onclick="insertEmoji('💖')">💖</span>
+                            <span class="emoji-item" onclick="insertEmoji('💪')">💪</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌟')">🌟</span>
+                            <span class="emoji-item" onclick="insertEmoji('✨')">✨</span>
+                            <span class="emoji-item" onclick="insertEmoji('🎉')">🎉</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌈')">🌈</span>
+                        </div>
+                    </div>
+                    <div class="emoji-category">
+                        <div class="emoji-title">自然</div>
+                        <div class="emoji-grid">
+                            <span class="emoji-item" onclick="insertEmoji('🌸')">🌸</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌺')">🌺</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌻')">🌻</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌙')">🌙</span>
+                            <span class="emoji-item" onclick="insertEmoji('☀️')">☀️</span>
+                            <span class="emoji-item" onclick="insertEmoji('⭐')">⭐</span>
+                            <span class="emoji-item" onclick="insertEmoji('🌊')">🌊</span>
+                            <span class="emoji-item" onclick="insertEmoji('🏔️')">🏔️</span>
+                        </div>
+                    </div>
+                    <div class="emoji-category">
+                        <div class="emoji-title">日常</div>
+                        <div class="emoji-grid">
+                            <span class="emoji-item" onclick="insertEmoji('📚')">📚</span>
+                            <span class="emoji-item" onclick="insertEmoji('💻')">💻</span>
+                            <span class="emoji-item" onclick="insertEmoji('☕')">☕</span>
+                            <span class="emoji-item" onclick="insertEmoji('🍜')">🍜</span>
+                            <span class="emoji-item" onclick="insertEmoji('🏃')">🏃</span>
+                            <span class="emoji-item" onclick="insertEmoji('🎵')">🎵</span>
+                            <span class="emoji-item" onclick="insertEmoji('📷')">📷</span>
+                            <span class="emoji-item" onclick="insertEmoji('✈️')">✈️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片上传 -->
+            <div class="image-section">
+                <div class="image-label">📷 添加图片</div>
+                <div class="image-upload-area" id="imageUploadArea" onclick="document.getElementById('imageInput').click()">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">点击或拖拽上传图片</div>
+                    <div class="upload-hint">支持 JPG、PNG、GIF 格式</div>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(event)">
+                <div class="image-preview-container" id="imagePreviewContainer"></div>
+            </div>
+
+            <!-- 标签输入 -->
+            <div class="tags-section">
+                <div class="tags-label">🏷️ 标签</div>
+                <input type="text" id="entryTags" class="tags-input" placeholder="用逗号分隔，如：学习, 工作, 成长">
+                <div class="tags-suggestions">
+                    <span class="tag-suggestion" onclick="addTag('学习')">学习</span>
+                    <span class="tag-suggestion" onclick="addTag('工作')">工作</span>
+                    <span class="tag-suggestion" onclick="addTag('成长')">成长</span>
+                    <span class="tag-suggestion" onclick="addTag('运动')">运动</span>
+                    <span class="tag-suggestion" onclick="addTag('阅读')">阅读</span>
+                    <span class="tag-suggestion" onclick="addTag('旅行')">旅行</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/write.js"></script>
+</body>
+</html>
